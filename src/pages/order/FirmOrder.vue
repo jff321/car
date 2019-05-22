@@ -63,15 +63,15 @@
             :point_money="point_money"
             @isUsePoint="isUsePoint"
         ></ordercell>
-        <div class="invoice-item" v-if="invoiceSwitch === 1">
-            <yd-cell-group>
-                <yd-cell-item arrow>
-                    <span slot="left">发票</span>
-                    <span slot="right" @click="toInvoice" v-if="invoice.type != 1 && invoice.name">{{invoice.name}}</span>
-                    <span slot="right" @click="toInvoice" v-else>{{tax_name}}</span>
-                </yd-cell-item>
-            </yd-cell-group>
-        </div>
+        <!--<div class="invoice-item" v-if="invoiceSwitch === 1">-->
+            <!--<yd-cell-group>-->
+                <!--<yd-cell-item arrow>-->
+                    <!--<span slot="left">发票</span>-->
+                    <!--<span slot="right" @click="toInvoice" v-if="invoice.type != 1 && invoice.name">{{invoice.name}}</span>-->
+                    <!--<span slot="right" @click="toInvoice" v-else>{{tax_name}}</span>-->
+                <!--</yd-cell-item>-->
+            <!--</yd-cell-group>-->
+        <!--</div>-->
         <orderinput
             @msg="sendMsg"
         ></orderinput>
@@ -138,10 +138,16 @@ export default {
         }
     },
     mounted () {
-        console.log('路有路由路由！', this.$route)
+        // console.log('路有路由路由！', this.$route.to.path);
         this.params.ids = this.cartIds
         this.userDefaultShip() // 获取默认收货地址
         this.orderUsablePoint()
+    },
+    // 监听路由变化 修改选中
+    watch: {
+        '$route' () {
+            console.log('hshshhshhs')
+        }
     },
     computed: {
         // 从vuex 中取门店开启状态
@@ -153,19 +159,13 @@ export default {
             return status
         },
         // 获取发票开启状态
-        invoiceSwitch () {
-          return this.$store.state.config.invoice_switch || 1
-        },
+        // invoiceSwitch () {
+        //   return this.$store.state.config.invoice_switch || 1
+        // },
         // 从vuex中获取发票信息
         ...mapGetters([
             'invoice'
         ])
-    },
-    watch: {
-        $route (to, from) {
-            console.log('11111111111111111111111111111111111111111')
-            console.log('监听路由变化', to.path)
-        }
     },
     methods: {
         // 获取默认门店

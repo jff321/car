@@ -61,6 +61,9 @@ const that = new Vue({
 })
 
 router.beforeEach((route, redirect, next) => {
+  // console.log('route:', route)
+  // console.log('redirect:', redirect)
+  // console.log('next:', next)
     document.title = route.meta.title ? route.meta.title : ''
     //百度统计
     if (typeof _hmt != "undefined" ) {

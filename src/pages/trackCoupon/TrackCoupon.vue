@@ -35,7 +35,7 @@
     methods: {
         // 立即购买
         buyNow (item) {
-            this.$router.push({path: '/firmorder', query: {item: JSON.stringify(item)}})
+            this.$router.push({path: `/firmorder?cartIds=${item.id}`, query: {item: JSON.stringify(item)}})
         },
         // 获取赛道券列表
         myCouponList () {
